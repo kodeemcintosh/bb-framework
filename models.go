@@ -23,6 +23,7 @@ const (
 type Food struct {
 	ID            string
 	Name          string
+	Description   string
 	Category      string
 	Brand         string
 	UnitOfMeasure string
@@ -34,15 +35,18 @@ type Food struct {
 }
 
 type FoodItem struct {
+	ID       string
 	MealID   string
 	Food     Food
 	Quantity int
 }
 
 type Meal struct {
-	ID    string
-	Name  string
-	Foods []FoodItem
+	ID          string
+	UserID      string
+	Name        string
+	Description string
+	Foods       []FoodItem
 }
 type ConsumedMeal struct {
 	ID         string
@@ -51,34 +55,35 @@ type ConsumedMeal struct {
 	ConsumedAt time.Time
 }
 
-type SavedFood struct {
-	ID            string
-	UserID        string
-	Name          string
-	Category      string
-	Brand         string
-	UnitOfMeasure string
-	ServingSize   string
-	Calories      int
-	Fat           int
-	Carb          int
-	Protein       int
-}
+// type CustomFood struct {
+// 	ID            string
+// 	UserID        string
+// 	Name          string
+// 	Category      string
+// 	Brand         string
+// 	UnitOfMeasure string
+// 	ServingSize   string
+// 	Calories      int
+// 	Fat           int
+// 	Carb          int
+// 	Protein       int
+// }
 
-type SavedMeal struct {
-	MealID string
-	UserID string
-	Name   string
-	Foods  []FoodItem
-}
+// type SavedMeal struct {
+// 	MealID      string
+// 	UserID      string
+// 	Name        string
+// 	Description string
+// 	Foods       []FoodItem
+// }
 
 type User struct {
-	ID         string
-	Name       Name
-	Address    Address
-	Phone      string
-	Email      string
-	SavedMeals []Meal
+	ID        string
+	Name      Name
+	Address   Address
+	Phone     string
+	Email     string
+	Favorites []Meal
 }
 
 type Name struct {

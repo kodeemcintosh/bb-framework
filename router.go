@@ -22,25 +22,17 @@ func Router() *mux.Router {
 		Methods("POST").
 		Name("CreateUser")
 	r.
-		HandleFunc("/users/{userID}/profile", UpdateUserInfoHandler).
+		HandleFunc("/users/{userID}", UpdateUserInfoHandler).
 		Methods("POST").
 		Name("UpdateUserInfo")
 	r.
-		HandleFunc("/users/{userID}/profile", GetUserInfoHandler).
+		HandleFunc("/users/{userID}", GetUserInfoHandler).
 		Methods("GET").
 		Name("GetUserInfo")
 	r.
-		HandleFunc("/users/{userID}/saved/foods/{foodID}", AddUserSavedFoodHandler).
+		HandleFunc("/foods/custom", CreateCustomFoodHandler).
 		Methods("POST").
-		Name("AddUserSavedFood")
-	r.
-		HandleFunc("/users/{userID}/saved/meals/{mealID}", AddUserSavedMealHandler).
-		Methods("POST").
-		Name("AddUserSavedMeal")
-	r.
-		HandleFunc("/users/{userID}/consumed/{mealID}", AddUserConsumedMealHandler).
-		Methods("POST").
-		Name("AddUserConsumedMeal")
+		Name("CreateCustomFood")
 
 		// FOODS
 	r.
@@ -48,17 +40,17 @@ func Router() *mux.Router {
 		Methods("GET").
 		Name("GetFoods")
 	r.
-		HandleFunc("/foods/saved", GetUserSavedFoodsHandler).
+		HandleFunc("/foods/custom", GetCustomFoodsHandler).
 		Methods("GET").
-		Name("GetUserSavedFoods")
+		Name("GetCustomFoods")
 	r.
 		HandleFunc("/foods", CreateFoodHandler).
 		Methods("POST").
 		Name("CreateFood")
 	r.
-		HandleFunc("/foods/{foodID}", UpdateFoodHandler).
+		HandleFunc("/foods/{foodID}", UpdateCustomFoodHandler).
 		Methods("POST").
-		Name("UpdateFood")
+		Name("UpdateCustomFood")
 	r.
 		HandleFunc("/foods/{foodID}", DeleteFoodHandler).
 		Methods("DELETE").
@@ -70,25 +62,45 @@ func Router() *mux.Router {
 		Methods("GET").
 		Name("GetMeals")
 	r.
-		HandleFunc("/meals/saved", GetUserSavedMealsHandler).
+		HandleFunc("/meals/favorite", GetFavoriteMealsHandler).
 		Methods("GET").
-		Name("GetUserSavedMeals")
+		Name("GetFavoriteMeals")
+	r.
+		HandleFunc("/meals/favorite", UpdateFavoriteMealStatusHandler).
+		Methods("POST").
+		Name("UpdateFavoriteMealStatus")
+	r.
+		HandleFunc("/meals/consumed", CreateConsumedMealHandler).
+		Methods("POST").
+		Name("CreateConsumedMeal")
 	r.
 		HandleFunc("/meals/consumed", GetConsumedMealsHandler).
 		Methods("GET").
 		Name("GetConsumedMeals")
 	r.
+		HandleFunc("/meals/consumed/{mealID}, UpdateConsumedMealsHandler).
+		Methods("POST").
+		Name("UpdateConsumedMeals")
+	r.
+		HandleFunc("/meals/consumed/{mealID}", DeleteConsumedMealsHandler).
+		Methods("DELETE").
+		Name("DeleteConsumedMeals")
+	r.
 		HandleFunc("/meals", CreateMealHandler).
 		Methods("POST").
 		Name("CreateMeal")
 	r.
-		HandleFunc("/meals/{mealID}", UpdateMealHandler).
-		Methods("POST").
-		Name("UpdateMeal")
-	r.
 		HandleFunc("/meals/{mealID}", DeleteMealHandler).
 		Methods("DELETE").
 		Name("DeleteMeal")
+	r.
+		HandleFunc("/meals/food-item", UpdateFoodItemHandler).
+		Methods("POST").
+		Name("UpdateFoodItem")
+	r.
+		HandleFunc("/meals/food-item/{foodItemID}", DeleteFoodItemHandler).
+		Methods("POST").
+		Name("DeleteFoodItem")
 
 	return r
 }
